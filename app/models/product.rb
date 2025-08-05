@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
-    has_many :product_types
-    has_one :details
+    has_one :product_type
+    has_one :detail
+    has_one :artwork
+    has_many :creator
 end

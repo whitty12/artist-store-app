@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_31_001803) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_05_204323) do
+  create_table "artworks", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.string "publishing_house"
@@ -29,6 +35,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_31_001803) do
     t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "creators", force: :cascade do |t|
@@ -39,13 +46,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_31_001803) do
   end
 
   create_table "details", force: :cascade do |t|
-    t.integer "products_id"
+    t.integer "product_id"
     t.string "description"
     t.decimal "price"
     t.integer "in_stock"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["products_id"], name: "index_details_on_products_id"
+    t.index ["product_id"], name: "index_details_on_product_id"
   end
 
   create_table "dn_d_adventures", force: :cascade do |t|
@@ -77,15 +84,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_31_001803) do
     t.string "medium"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "artstyle"
   end
 
   create_table "products", force: :cascade do |t|
     t.integer "promotions_id"
     t.integer "details_id"
     t.integer "product_types_id"
-    t.integer "title_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
     t.index ["details_id"], name: "index_products_on_details_id"
     t.index ["product_types_id"], name: "index_products_on_product_types_id"
     t.index ["promotions_id"], name: "index_products_on_promotions_id"
@@ -120,7 +128,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_31_001803) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password"
-    t.integer "cart_id"
     t.string "email"
     t.string "first_name"
     t.string "string"
@@ -132,6 +139,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_31_001803) do
     t.string "birthday"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cart_id"], name: "index_users_on_cart_id"
   end
 end
