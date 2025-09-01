@@ -2,7 +2,6 @@
 class Creator < ApplicationRecord
     has_many :product
 
-
     def full_name
         "#{first_name} #{last_name}"    
     end
