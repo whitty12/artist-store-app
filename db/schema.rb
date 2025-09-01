@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_31_055036) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_01_180015) do
   create_table "cart_items", force: :cascade do |t|
     t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cart_id"
+  end
+
+  create_table "carts", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "cart_item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_item_id"], name: "index_carts_on_cart_item_id"
+    t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
   create_table "creators", force: :cascade do |t|
@@ -67,7 +76,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_31_055036) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password"
-    t.integer "cart_item_id"
+    t.integer "cart_id"
     t.string "email"
     t.string "first_name"
     t.string "string"
@@ -79,7 +88,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_31_055036) do
     t.string "birthday"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cart_item_id"], name: "index_users_on_cart_item_id"
+    t.index ["cart_id"], name: "index_users_on_cart_id"
   end
 
   add_foreign_key "products", "product_types"

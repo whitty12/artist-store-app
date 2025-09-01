@@ -1,5 +1,6 @@
 class CartItem < ApplicationRecord
-    has_many :product
+    belongs_to :product
+    
     #cart has many items but should belong to one user
-    belongs_to :user
+    belongs_to :cart
 end

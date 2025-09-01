@@ -20,11 +20,10 @@ Rails.application.routes.draw do
   get "/user/:id", to: "user#show" 
   get "/product", to: "product#index"
   get "/product/:id/product_details", to: "product_details#show"
-  
 
   get "/creator", to: "creator#index"
   get "/creator/:id", to: "creator#show"
-  get "user/:id/cart_items", to: "cart_items#index"
+  get "user/:id/cart", to: "cart#index"
   get "/promotion", to: "promotion#index"
   get "/promotion/:id", to: "promotion#show"
   get "/product_type", to: "product_type#index"
