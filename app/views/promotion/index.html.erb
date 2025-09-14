@@ -1,7 +1,0 @@
-<h1> Active Promotions </h1>
-
-<ul>
- <% @promotions.each do |promotion| %>
-   <li><%=link_to"#{promotion.promotion_description}", "/promotion/#{promotion.id}" %></li>
- <% end %>
-</ul>
