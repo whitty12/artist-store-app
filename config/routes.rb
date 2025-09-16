@@ -8,9 +8,8 @@ Rails.application.routes.draw do
       resources :cart_items, only: [:create, :destroy]
     end
   end
-  resources :products do
-    resource :product_details
-  end
+  resources :products
+  resources :product_details
   resources :promotions
   resources :creators
   resources :product_types

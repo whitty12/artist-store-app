@@ -4,4 +4,6 @@ class Product < ApplicationRecord
     has_one :artwork
     has_many :creator
     has_many :promotions
+
+    accepts_nested_attributes_for :product_detail, allow_destroy: true
 end
