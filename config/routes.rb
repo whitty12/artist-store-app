@@ -3,10 +3,9 @@ Rails.application.routes.draw do
   #get "user/:id/profile", to: "user#profile"
   
   # Define our default resourceful routes
-  resources :users do
-    resource :cart do
-      resources :cart_items, only: [:create, :destroy]
-    end
+  resources :users 
+  resource :cart do
+    resources :cart_items, only: [:new, :create, :destroy]
   end
   resources :products
   resources :promotions
