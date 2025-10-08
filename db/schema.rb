@@ -10,28 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_05_204323) do
-  create_table "artworks", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "books", force: :cascade do |t|
-    t.string "title"
-    t.string "publishing_house"
-    t.integer "pages"
-    t.integer "word_count"
-    t.integer "creator_id"
-    t.string "product_type"
-    t.integer "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["creator_id"], name: "index_books_on_creator_id"
-    t.index ["product_type", "product_id"], name: "index_books_on_product"
-  end
-
-  create_table "carts", force: :cascade do |t|
+ActiveRecord::Schema[8.0].define(version: 2025_08_07_170221) do
+  create_table "cart_items", force: :cascade do |t|
     t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -45,38 +25,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_05_204323) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "details", force: :cascade do |t|
+  create_table "product_details", force: :cascade do |t|
     t.integer "product_id"
     t.string "description"
     t.decimal "price"
     t.integer "in_stock"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_details_on_product_id"
-  end
-
-  create_table "dn_d_adventures", force: :cascade do |t|
-    t.string "title"
-    t.string "dnd_version"
-    t.integer "creator_id"
-    t.string "product_type"
-    t.integer "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["creator_id"], name: "index_dn_d_adventures_on_creator_id"
-    t.index ["product_type", "product_id"], name: "index_dn_d_adventures_on_product"
-  end
-
-  create_table "hand_made_arts", force: :cascade do |t|
-    t.string "title"
-    t.string "dimensions"
-    t.integer "creator_id"
-    t.string "product_type"
-    t.integer "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["creator_id"], name: "index_hand_made_arts_on_creator_id"
-    t.index ["product_type", "product_id"], name: "index_hand_made_arts_on_product"
+    t.index ["product_id"], name: "index_product_details_on_product_id"
   end
 
   create_table "product_types", force: :cascade do |t|
@@ -89,12 +45,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_05_204323) do
 
   create_table "products", force: :cascade do |t|
     t.integer "promotions_id"
-    t.integer "details_id"
+    t.integer "product_details_id"
     t.integer "product_types_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "title"
-    t.index ["details_id"], name: "index_products_on_details_id"
+    t.index ["product_details_id"], name: "index_products_on_product_details_id"
     t.index ["product_types_id"], name: "index_products_on_product_types_id"
     t.index ["promotions_id"], name: "index_products_on_promotions_id"
   end
@@ -106,28 +62,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_05_204323) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "short_stories", force: :cascade do |t|
-    t.string "title"
-    t.integer "pages"
-    t.integer "word_count"
-    t.integer "creator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["creator_id"], name: "index_short_stories_on_creator_id"
-  end
-
-  create_table "stores", force: :cascade do |t|
-    t.integer "product_id"
-    t.integer "cart_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cart_id"], name: "index_stores_on_cart_id"
-    t.index ["product_id"], name: "index_stores_on_product_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password"
+    t.integer "cart_item_id"
     t.string "email"
     t.string "first_name"
     t.string "string"
@@ -139,5 +77,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_05_204323) do
     t.string "birthday"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["cart_item_id"], name: "index_users_on_cart_item_id"
   end
 end
