@@ -1,0 +1,24 @@
+<h1><%= @product.title %></h1>
+   
+   <%= render @product %>
+
+   <% if session[:user_id].present? %>
+      <%= button_to "Add to Cart", cart_cart_items_path(@cart), 
+         params: { 
+            cart_item: { 
+               product_id: @product.id 
+            }
+         }, 
+         method: :post %>
+      <%= link_to "View Cart", cart_path(@cart) %>
+   <% else %>
+      <p> Login to add to your cart </p>
+   <% end %>
+
+
+   <%= link_to "Return to product list", products_path %>
+
+   <% if session[:role]== 'admin' %>
+      <%= link_to "Edit this product", edit_product_path(@product) %>
+      <%= button_to "Delete this product", @product, method: :delete %>
+   <% end %>

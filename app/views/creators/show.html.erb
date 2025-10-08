@@ -1,0 +1,7 @@
+<h1><%= "#{@creator.full_name}" %></h1>
+
+<%= link_to "Back to artists", creators_path %>
+<% if session[:role]== 'admin' %>
+    <%= link_to "Edit this artist", edit_creator_path(@creator) %>
+    <%= button_to "Delete this artist", @creator, method: :delete %>
+<% end %>

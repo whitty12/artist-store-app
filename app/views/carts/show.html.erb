@@ -1,0 +1,12 @@
+<h1> Your Cart</h1>
+
+<ul>
+ <% @cart_items.each do |cart_item| %>
+   <li>
+        <%=link_to cart_item.product.title, "/products/#{cart_item.product.id}" %>
+        <%= button_to "Remove", cart_cart_item_path(cart_item), method: :delete %>
+   </li>
+ <% end %>
+</ul>
+
+<%= link_to "Back to user", user_path(current_user) %>

@@ -1,0 +1,11 @@
+<h1> Active Promotions </h1>
+
+<ul>
+ <% @promotions.each do |promotion| %>
+   <li><%=link_to"#{promotion.promotion_description}", promotion %></li>
+ <% end %>
+</ul>
+
+<% if session[:role]== 'admin' %>
+  <%= link_to "New promotion", new_promotion_path %>
+<% end %>
