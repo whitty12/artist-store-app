@@ -1,0 +1,15 @@
+<h1> Products </h1>
+ <% @products.each do |product| %>
+   <h2><%= link_to "#{product.title}", product %></h2> 
+   <h2><%= "#{product.medium}"%></h2>
+   <ul>
+      <% if product.promotion.present? %>
+          <li><h2>Promotion: <%= product.promotion.promotion_description %></h2></li>
+          <li><h2>Discount: <%= "#{product.promotion.discount_percent}%" %> </li>
+      <% end %>
+   </ul>
+ <% end %>
+
+ <% if session[:role]== 'admin' %>
+    <%= link_to "New product", new_product_path %>
+ <% end %>

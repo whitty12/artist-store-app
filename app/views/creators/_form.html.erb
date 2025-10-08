@@ -1,0 +1,25 @@
+<%= form_with(model: creator) do |form| %>
+  <% if creator.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(creator.errors.count, "error") %> prohibited this creator from being saved:</h2>
+
+      <ul>
+        <% creator.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  
+  <div>
+    <%= form.label :first_name, style: "display: block" %>
+    <%= form.text_field :first_name, class: 'form-control' %>
+    <%= form.label :last_name, style: "display: block" %>
+    <%= form.text_field :last_name, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

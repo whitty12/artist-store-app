@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_29_204710) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_02_010237) do
   create_table "cart_items", force: :cascade do |t|
     t.integer "product_id"
     t.datetime "created_at", null: false
@@ -52,14 +52,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_29_204710) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.integer "product_details_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "title"
     t.integer "promotion_id"
     t.integer "product_type_id"
     t.integer "creator_id"
-    t.index ["product_details_id"], name: "index_products_on_product_details_id"
+    t.string "description"
+    t.float "price"
+    t.boolean "available"
+    t.string "medium"
     t.index ["product_type_id"], name: "index_products_on_product_type_id"
     t.index ["promotion_id"], name: "index_products_on_promotion_id"
   end
@@ -69,8 +71,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_29_204710) do
     t.float "discount_percent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "product_id"
-    t.index ["product_id"], name: "index_promotions_on_product_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -95,5 +95,4 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_29_204710) do
 
   add_foreign_key "products", "product_types"
   add_foreign_key "products", "promotions"
-  add_foreign_key "promotions", "products"
 end

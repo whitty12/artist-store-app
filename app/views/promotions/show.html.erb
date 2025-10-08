@@ -1,0 +1,9 @@
+<h2><%= "#{@promotion.promotion_description}" %></h2>
+    <p> Discount: <%= "#{@promotion.discount_percent}%" %> </p>
+
+
+<%= link_to "Back to promotions", promotions_path %>
+<% if session[:role]== 'admin' %>
+    <%= link_to "Edit this promotion", edit_promotion_path(@promotion) %>
+    <%= button_to "Delete this promotion", @promotion, method: :delete %>
+<% end %>

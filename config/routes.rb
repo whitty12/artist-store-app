@@ -3,16 +3,28 @@ Rails.application.routes.draw do
   #get "user/:id/profile", to: "user#profile"
   
   # Define our default resourceful routes
-  resources :users do
-    resource :cart do
-      resources :cart_items, only: [:create, :destroy]
-    end
+  resources :users 
+  resource :cart do
+    resources :cart_items, only: [:new, :create, :destroy]
   end
   resources :products
-  resources :product_details
   resources :promotions
   resources :creators
-  resources :product_types
+
+  namespace :api do
+    namespace :v1 do
+      get '/users', to: 'users#index'
+      get '/users/:id', to: 'users#show'
+      get '/promotions', to: 'promotions#index'
+      get '/promotions/:id', to: 'promotions#show'
+      get '/products', to: 'products#index'
+      get '/products/:id', to: 'products#show'
+      get '/creators', to: 'creators#index'
+      get '/creators/:id', to: 'creators#show'
+      get '/cart', to: 'cart#show'
+    end
+  end
+
 
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
