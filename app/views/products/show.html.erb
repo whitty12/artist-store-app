@@ -2,10 +2,10 @@
    
    <%= render @product %>
 
-   <% if session[:user_id].present? %>
+   <% if current_user.present? %>
       <%= button_to "Add to Cart", cart_cart_items_path(@cart), 
          params: { 
-            cart_item: { 
+            cart_item: {
                product_id: @product.id 
             }
          }, 

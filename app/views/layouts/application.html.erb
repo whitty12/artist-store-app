@@ -37,6 +37,9 @@
             <% end %>
           </ul>
         </div>
+        <div class="new-account">
+          <%= link_to "Create an account", new_user_path %>
+        </div>
         <div class="login-logout">
           <% if session[:user_id] %>
             <%= button_to 'Logout', logout_path, method: :delete, class: 'logout-link nav-link', data: { confirm: 'Are you sure you want to log out?' } %>

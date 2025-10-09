@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    #one user has one set of cart items
+    #one user has one cart
     has_one :cart
     
     #authentication

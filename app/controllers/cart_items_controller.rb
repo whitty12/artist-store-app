@@ -2,11 +2,12 @@ class CartItemsController < ApplicationController
   before_action :set_cart, :set_cart_item
 
   def new
-    @cart_item.product_id
+    @cart_item = @cart.cart_items.build(product: @product)
   end
 
   def create
-    @cart_item = @cart.cart_items.new(cart_items_params)
+    debugger
+    @cart_item = @cart.cart_items.build(cart_items_params)
 
      respond_to do |format|
           if @cart_item.save
