@@ -25,36 +25,44 @@
   <body>
     <div class="header">
       <nav class="navbar navbar-expand-lg d-flex justify-content-between align-items-end">
-        <div class="d-flex align-items-end">
-          <ul class="navbar-nav">
-            <% if session[:user_id] %>
-              <li class='nav-item'>
-                <% user = User.find_by(id: session[:user_id]) %>
-                <% if user %>
-                  <span class="nav-link">Welcome, <%= user.username %>!</span>
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-        <div class="new-account">
-          <%= link_to "Create an account", new_user_path %>
-        </div>
-        <div class="login-logout">
-          <% if session[:user_id] %>
-            <%= button_to 'Logout', logout_path, method: :delete, class: 'logout-link nav-link', data: { confirm: 'Are you sure you want to log out?' } %>
-          <% else %>
-            <%= link_to 'Login', login_path, class: 'logout-link nav-link' %>
-          <% end %>
-        </div>
-        <% if session[:user_id] %>
-            <li class='nav-item'>
-              <% user = User.find_by(id: session[:user_id]) %>
-              <% if user %>
-                <%= button_to 'Account', user_path(user), method: :get %>
+          <div class="d-flex align-items-end">
+            <ul class="navbar-nav">
+              <% if session[:user_id] %>
+                <li class='nav-item'>
+                  <% user = User.find_by(id: session[:user_id]) %>
+                  <% if user %>
+                    <span class="nav-link">Welcome, <%= user.username %>!</span>
+                  <% end %>
+                </li>
               <% end %>
-            </li>
-        <% end %>
+              <div class="new-account">
+                <%= link_to "Create an account", new_user_path %>
+              </div>
+            </ul>
+          </div>
+          <div class= "account-management">
+          <div class="login-logout">
+            <% if session[:user_id] %>
+              <%= button_to 'Logout', logout_path, method: :delete, class: 'logout-link nav-link', data: { confirm: 'Are you sure you want to log out?' } %>
+            <% else %>
+              <%= link_to 'Login', login_path, class: 'logout-link nav-link' %>
+            <% end %>
+          </div>
+          <div class ="account"
+            <% if session[:user_id] %>
+                <li class='nav-item'>
+                  <% user = User.find_by(id: session[:user_id]) %>
+                  <% if user %>
+                    <%= button_to 'Account', user_path(user), method: :get %>
+                    <%= button_to 'My Cart', cart_path(@cart), method: :get %>
+                  <% end %>
+                </li>
+            <% end %>
+          </div>
+        </div>
+        <div class= "product-redirect">
+              <%= button_to "Store", products_path, method: :get %>
+        </div>
       </nav>
     </div>
     <div class='container main-container'>

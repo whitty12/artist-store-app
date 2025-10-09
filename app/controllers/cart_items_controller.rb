@@ -1,17 +1,16 @@
 class CartItemsController < ApplicationController
-  before_action :set_cart, :set_cart_item
+  before_action :set_cart
 
   def new
     @cart_item = @cart.cart_items.build(product: @product)
   end
 
   def create
-    debugger
     @cart_item = @cart.cart_items.build(cart_items_params)
 
      respond_to do |format|
           if @cart_item.save
-              format.html { redirect_to products_path, notice: "Added to your cart!" }
+              format.html { redirect_to cart_path(@cart) notice: "Added to your cart!" }
               format.json { render :show, status: :created, location: @cart_item}
           else
               format.html { render :new, status: :unprocessable_entity }
@@ -21,6 +20,7 @@ class CartItemsController < ApplicationController
   end
 
   def destroy
+    @cart_item = @cart.cart_items.find(params[:id])
     @cart_item.destroy!
     redirect_to cart_path(@cart)
   end
