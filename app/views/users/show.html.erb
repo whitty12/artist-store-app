@@ -4,7 +4,7 @@
     <li><%=link_to "My Cart", cart_path %></li>
     <%= render @user %>
 
-    <%= link_to "Edit this user", edit_user_path(@user) %>
+    <%= link_to "Edit Profile", edit_user_path(@user) %>
 <% end %>
     
 <% if session[:role]== 'admin' %>

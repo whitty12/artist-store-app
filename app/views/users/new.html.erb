@@ -4,6 +4,8 @@
 
 <br>
 
+<% if session[:role]== 'admin' %>
 <div>
   <%= link_to "Back to users", users_path %>
 </div>
+<% end %>
