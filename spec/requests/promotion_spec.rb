@@ -42,20 +42,48 @@ RSpec.describe "Promotions", type: :request do
       @promotion2 = Promotion.create(
         promotion_description: "Free as can be!",
         discount_percent: 100.0,
-      )
-
-      @update_promotion_params = {promotion_description: "Almost Muri", discount_percent:90.0}
-      
+      )      
     end
+    
+    let!(:admin_user) {
+      User.create(
+        username: "Admin_User",
+        password: "password",
+        cart_id: 1,
+        email: "testemail@com",
+        first_name: "Stephanie",
+        last_name: "Whitworth",
+        address: "test address",
+        zipcode: "00000",
+        state: "CO",
+        sex: "F",
+        birthday: "January 1, 1990",
+        role: 'admin'
+      )
+    }
 
     it 'returns a page containing the information of a promotion' do
-      get '/promotions/1'
+      get "/promotions/#{@promotion1.id}"
       expect(response.body).to include(@promotion1.promotion_description)
       expect(response.body).to include(@promotion1.discount_percent.to_s)
     end
 
-    it 'updates the promotion information' do
-      put '/promotions/1', params: @update_promotion_params
+
+    it 'updates the promotion information' do  
+      post '/login', params: { 
+        username: "Admin_User", 
+        password: 'password' 
+      }
+
+      put "/promotions/#{@promotion1.id}", params: {
+        promotion: {
+          promotion_description: "Almost Muri", discount_percent:90.0
+        }
+      }
+
+      follow_redirect!
+      @promotion1.reload
+
       expect(response.body).to include("Almost Muri")
       expect(response.body).to include("90.0")
     end

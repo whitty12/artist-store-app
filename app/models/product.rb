@@ -4,6 +4,6 @@ class Product < ApplicationRecord
 
     validates :title, presence: true
     validates :description, presence: true
-    validates :price, presence: true, numericality: { only_float: true }
+    validates :price, presence: true, numericality: { greater_than: 0 }
 
 end

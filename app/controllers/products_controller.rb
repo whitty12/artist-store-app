@@ -44,7 +44,9 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product.destroy!
+    @product.destroy
+
+    redirect_to products_path
   end
 
   private
@@ -53,6 +55,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.expect(product: [:title, :description, :available, :medium, :creator_id, :promotion_id])
+    params.expect(product: [:title, :description, :available, :medium, :creator_id, :promotion_id, :price])
   end
 end

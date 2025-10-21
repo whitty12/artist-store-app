@@ -32,14 +32,13 @@
           <% user = User.find_by(id: session[:user_id]) %>
           <% if user %>
             <span>Welcome, <%= link_to  user.username, user_path(user)%></span>
+            <% if session[:role] == 'admin' %>
+              <%= link_to "User Accounts", users_path, class: "nav-link" %>
+            <% end %>
           <% else %>
             <%= link_to "Create Account", new_user_path, class: "nav-link" %>
           <% end %>
         </div>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
       
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
@@ -54,6 +53,12 @@
               <% else %>
                 <%= link_to "Login", login_path, class: "nav-link" %>
               <% end %>
+            </li>
+             <li class="nav-item">
+              <%= link_to "Promotions", promotions_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Artists", creators_path, class: "nav-link" %>
             </li>
           </ul>
         </div>

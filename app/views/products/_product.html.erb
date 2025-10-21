@@ -1,11 +1,17 @@
 
-<ul>
-    <h2>Created by: <%= @product.creator.full_name %></h2>
-    <h2>Description: <%= @product.description %></h2>
-    <h2>Price: <%= @product.price %></h2>
-    <h2>Medium: <%= @product.medium %></h2>
-    <h2>Available: <%= @product.available %></h2>
+<ul class = "list-group">
+    <li class= "list-group-item">Created by: <%= @product.creator.full_name %></li>
+    <li class= "list-group-item">Description: <%= @product.description %></li>
+    <li class= "list-group-item">Price: <%= @product.price %></li>
+    <li class= "list-group-item">Medium: <%= @product.medium %></li>
+    <% if @product.available == true %>
+        <li class= "list-group-item">Available: Yes </li>
+    <% elsif @product.available == false %>
+        <li class= "list-group-item">Available: No </li>
+    <% else %>
+        <li class= "list-group-item">Available: No Information </li>
+    <% end %>
     <% if product.promotion.present? %>
-        <h2>Promotion: <%= product.promotion.promotion_description %> - <%= "#{product.promotion.discount_percent}% Discount" %></h2>
+        <li class= "list-group-item"> Promotion: <%= "#{product.promotion.promotion_description} - #{product.promotion.discount_percent}% Discount" %></li>
     <% end %>
 </ul>

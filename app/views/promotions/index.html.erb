@@ -1,11 +1,13 @@
 <h1> Active Promotions </h1>
 
-<ul>
  <% @promotions.each do |promotion| %>
-   <li><%=link_to"#{promotion.promotion_description}", promotion %></li>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%=link_to "#{promotion.promotion_description}", promotion %></h5>
+    </div>
+  </div>
  <% end %>
-</ul>
 
 <% if session[:role]== 'admin' %>
-  <%= link_to "New promotion", new_promotion_path %>
+  <%= link_to "New Promotion", new_promotion_path,  class:"btn btn-secondary" %>
 <% end %>

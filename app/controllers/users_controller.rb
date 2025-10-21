@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
-  
-  #Needs require user verification in order to update/edit, for now, only admin can update/edit
-  before_action :require_admin, only: %i[index edit update destroy ]
+  before_action :require_admin, only: %i[index destroy ]
 
   def index
     @users = User.all
@@ -24,10 +22,10 @@ class UsersController < ApplicationController
 
   def create
       @user = User.new(user_params)
-      @user.create_cart
 
       respond_to do |format|
           if @user.save
+              @user.create_cart
               format.html { redirect_to @user, notice: "User was successfully created." }
               format.json { render :show, status: :created, location: @user}
           else
@@ -61,7 +59,9 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    @user.destroy!
+    @user.destroy
+
+    redirect_to users_path
   end
 
   private

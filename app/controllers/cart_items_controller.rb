@@ -10,7 +10,7 @@ class CartItemsController < ApplicationController
 
      respond_to do |format|
           if @cart_item.save
-              format.html { redirect_to cart_path(@cart) notice: "Added to your cart!" }
+              format.html { redirect_to cart_path(@cart), notice: "Added to your cart!" }
               format.json { render :show, status: :created, location: @cart_item}
           else
               format.html { render :new, status: :unprocessable_entity }
