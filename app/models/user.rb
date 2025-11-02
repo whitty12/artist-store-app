@@ -12,7 +12,7 @@ class User < ApplicationRecord
     validates :last_name, presence: true
     validates :address, presence: true
     validates :zipcode, presence: true
-    validates :email, presence: true
+    validates :email, presence: true, uniqueness: true
     validates :state, presence: true
 
     def full_name

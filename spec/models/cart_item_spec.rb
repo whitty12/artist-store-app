@@ -34,8 +34,26 @@ RSpec.describe CartItem, type: :model do
       cart_id: cart.id
     )
 
+    invalid_cart = CartItem.create(
+      product_id: product.id,
+      cart_id: nil
+    )
+
+    invalid_product = CartItem.create(
+      product_id: nil,
+      cart_id: cart.id
+    )
+
+    #valid item is created
     expect(item1.product.title).to eq("Test Title")
     expect(item1.cart_id).to eq(cart.id)
+
+    #invalid cart id
+    expect(invalid_cart).not_to be_valid
+
+    #invalid product id
+    expect(invalid_product).not_to be_valid
+
   end
 
 end
