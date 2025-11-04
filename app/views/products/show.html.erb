@@ -14,7 +14,7 @@
          class:"btn btn-primary" %>
       <%= link_to "View Cart", cart_path(@cart), class:"btn btn-secondary" %>
    <% else %>
-      <p> Login to add to your cart </p>
+      <%= link_to "Login to Add to Cart", login_path, class:"btn btn-secondary" %>
    <% end %>
 
 
