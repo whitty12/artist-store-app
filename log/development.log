@@ -64970,3 +64970,100 @@ Processing by SessionsController#create as TURBO_STREAM
 Completed 401 Unauthorized in 896ms (Views: 13.0ms | ActiveRecord: 2.5ms (2 queries, 0 cached) | GC: 1.4ms)
 
 
+Started GET "/users/new" for ::1 at 2025-11-03 19:43:00 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='ArtistStoreApp'*/[0m
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 85.0ms | GC: 0.0ms)
+  Rendered users/new.html.erb within layouts/application (Duration: 101.1ms | GC: 0.0ms)
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT 1 /*action='new',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/views/layouts/application.html.erb:32
+  Rendered layout layouts/application.html.erb (Duration: 248.9ms | GC: 0.0ms)
+Completed 200 OK in 2806ms (Views: 289.5ms | ActiveRecord: 51.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/users" for ::1 at 2025-11-03 19:43:19 -0700
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"first_name"=>"testing", "last_name"=>"testing", "sex"=>"testing", "birthday"=>"testing", "username"=>"testing", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "address"=>"testing", "zipcode"=>"testing", "state"=>"testing"}, "commit"=>"Submit"}
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:27:in `block in create'
+  [1m[36mUser Exists? (5.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'testing' LIMIT 1 /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:27:in `block in create'
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'testing' LIMIT 1 /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:27:in `block in create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("username", "cart_id", "email", "first_name", "string", "last_name", "address", "zipcode", "state", "sex", "birthday", "created_at", "updated_at", "role", "password_digest") VALUES ('testing', NULL, 'testing', 'testing', NULL, 'testing', 'testing', 'testing', 'testing', 'testing', 'testing', '2025-11-04 02:43:21.677577', '2025-11-04 02:43:21.677577', 'basic user', '$2a$12$EEBNYVje4OkAYxR2NHtAXeklIxZgwWf/B9S49hCnQy91hfiFRMnjW') RETURNING "id" /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (10.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mCart Create (6.3ms)[0m  [1m[32mINSERT INTO "carts" ("user_id", "cart_item_id", "created_at", "updated_at") VALUES (18, NULL, '2025-11-04 02:43:21.698804', '2025-11-04 02:43:21.698804') RETURNING "id" /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mCart Load (1.8ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."user_id" = 18 LIMIT 1 /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+Redirected to http://localhost:3000/login
+Completed 302 Found in 1451ms (ActiveRecord: 31.1ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for ::1 at 2025-11-03 19:43:21 -0700
+Processing by SessionsController#new as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 17.6ms | GC: 0.0ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT 1 /*action='new',application='ArtistStoreApp',controller='sessions'*/[0m
+  ↳ app/views/layouts/application.html.erb:32
+  Rendered layout layouts/application.html.erb (Duration: 24.5ms | GC: 0.0ms)
+Completed 200 OK in 1052ms (Views: 29.0ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2025-11-03 19:44:14 -0700
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 9.0ms | GC: 0.3ms)
+  Rendered users/new.html.erb within layouts/application (Duration: 28.2ms | GC: 0.3ms)
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT 1 /*action='new',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/views/layouts/application.html.erb:32
+  Rendered layout layouts/application.html.erb (Duration: 74.6ms | GC: 0.6ms)
+Completed 200 OK in 1254ms (Views: 91.5ms | ActiveRecord: 34.2ms (1 query, 0 cached) | GC: 3.9ms)
+
+
+Started POST "/users" for ::1 at 2025-11-03 19:44:32 -0700
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"first_name"=>"notice", "last_name"=>"notice", "sex"=>"notice", "birthday"=>"notice", "username"=>"notice", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "address"=>"notice", "zipcode"=>"notice", "state"=>"notice"}, "commit"=>"Submit"}
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:27:in `block in create'
+  [1m[36mUser Exists? (4.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'notice' LIMIT 1 /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:27:in `block in create'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'notice' LIMIT 1 /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:27:in `block in create'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "cart_id", "email", "first_name", "string", "last_name", "address", "zipcode", "state", "sex", "birthday", "created_at", "updated_at", "role", "password_digest") VALUES ('notice', NULL, 'notice', 'notice', NULL, 'notice', 'notice', 'notice', 'notice', 'notice', 'notice', '2025-11-04 02:44:34.338608', '2025-11-04 02:44:34.338608', 'basic user', '$2a$12$Czer0UuklFN44InrtImNpuido9Sh1q8yAflQo7NyNOutpOgUGrLHa') RETURNING "id" /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (8.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mCart Create (5.6ms)[0m  [1m[32mINSERT INTO "carts" ("user_id", "cart_item_id", "created_at", "updated_at") VALUES (19, NULL, '2025-11-04 02:44:34.354315', '2025-11-04 02:44:34.354315') RETURNING "id" /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+  [1m[36mCart Load (2.7ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."user_id" = 19 LIMIT 1 /*action='create',application='ArtistStoreApp',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:28:in `block in create'
+Redirected to http://localhost:3000/login
+Completed 302 Found in 1305ms (ActiveRecord: 28.4ms (5 queries, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/login" for ::1 at 2025-11-03 19:44:34 -0700
+Processing by SessionsController#new as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 8.9ms | GC: 0.0ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT 1 /*action='new',application='ArtistStoreApp',controller='sessions'*/[0m
+  ↳ app/views/layouts/application.html.erb:32
+  Rendered layout layouts/application.html.erb (Duration: 16.0ms | GC: 0.0ms)
+Completed 200 OK in 1080ms (Views: 22.3ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
