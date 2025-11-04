@@ -4,7 +4,10 @@
 
 <br>
 
-<div>
-  <%= link_to "Show this user", @user %> |
-  <%= link_to "Back to users", users_path %>
+<div class="btn-group" role="group" aria-label="Basic example">
+  <%= link_to "Profile", @user, class:"btn btn-secondary" %>
+
+  <% if session[:role] %>
+    <%= link_to "Back to users", users_path, class:"btn btn-secondary" %>
+  <% end %>
 </div>

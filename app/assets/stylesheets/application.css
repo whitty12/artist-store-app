@@ -8,3 +8,16 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+.header {
+	background-color: #eee;
+	padding: 0 60px;
+}
+
+.login-logout {
+	padding: 8px 0;
+}
+
+.main-container {
+	margin-top: 20px;
+}

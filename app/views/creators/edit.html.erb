@@ -4,7 +4,7 @@
 
 <br>
 
-<div>
-  <%= link_to "Show this creator", @creator %> |
-  <%= link_to "Back to creators", creators_path %>
+<div class="btn-group" role="group">
+  <%= link_to "Back", @creator, class:"btn btn-secondary" %>
+  <%= link_to "Artists", creators_path, class:"btn btn-secondary" %>
 </div>

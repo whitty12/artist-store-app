@@ -1,10 +1,14 @@
 <h1> Our Artists</h1>
-<ul>
+
  <% @creators.each do |creator| %>
-   <li><%= link_to "#{creator.full_name}", creator %></li>
+   <div class="card" style="width: 18rem;">   
+      <div class="card-body">
+         <h5 class="card-title"><%= link_to "#{creator.full_name}", creator %></h5>
+      </div>
+    </div>
  <% end %>
-</ul>
+
 
 <% if session[:role]== 'admin' %>
-  <%= link_to "New artist", new_creator_path %>
+  <%= link_to "New Artist", new_creator_path, class:"btn btn-secondary" %>
 <% end %>

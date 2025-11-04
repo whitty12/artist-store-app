@@ -1,13 +1,14 @@
 <% if current_user== @user|| session[:role]== 'admin' %>
     <h1><%= "#{@user.full_name}" %></h1>
 
-    <li><%=link_to "My Cart", cart_path %></li>
     <%= render @user %>
-
-    <%= link_to "Edit this user", edit_user_path(@user) %>
-<% end %>
-    
-<% if session[:role]== 'admin' %>
-    <%= link_to "Return to previous user list", users_path %>
-    <%= button_to "Delete this user", @user, method: :delete %>
+    <div class="btn-group" role="group" aria-label="Profile Navigation">
+        <%=link_to "My Cart", cart_path, class: "btn btn-secondary" %>
+        <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-secondary" %>
+    </div>
+    <div class="btn-group" role="group" aria-label="All Users">
+        <% if session[:role]== 'admin' %>
+            <%= link_to "All Users", users_path, class:"btn btn-secondary" %>
+        <% end %>
+    </div>
 <% end %>

@@ -2,11 +2,15 @@
 
 <ul>
  <% @cart_items.each do |cart_item| %>
-   <li>
+
+   <div class="card" style="width: 18rem;">
+      <div class="card-body">
         <%=link_to cart_item.product.title, "/products/#{cart_item.product.id}" %>
-        <%= button_to "Remove", cart_cart_item_path(cart_item), method: :delete %>
-   </li>
+        <%= button_to "Remove", cart_cart_item_path(cart_item), method: :delete, class:"btn btn-secondary" %>
+      </div>
+    </div>
  <% end %>
 </ul>
 
-<%= link_to "Back to user", user_path(current_user) %>
+<%= link_to "My Profile", user_path(current_user), class:"btn btn-secondary" %>
+<%= link_to "Products", products_path, class:"btn btn-secondary" %>

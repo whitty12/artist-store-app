@@ -12,31 +12,42 @@
   <% end %>
 
   <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title, class: 'form-control' %>
+    <%= form.label :creator_id, style: "display: block" %>
+    <%= form.collection_select :creator_id, Creator.all, :id, :full_name %>
   </div>
 
   <div>
     <%= form.label :promotion_id, style: "display: block" %>
-    <%= form.text_field :promotion_id, class: 'form-control' %>
-  </div<
+     <%= form.collection_select :promotion_id, Promotion.all, :id, :promotion_description, include_blank: 'None' %>
+  </div>
 
-   <div>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+  
+  <div>
     <%= form.label :description, style: "display: block" %>
     <%= form.text_field :description, class: 'form-control' %>
   </div>
 
   <div>
+    <%= form.label :medium, style: "display: block" %>
+    <%= form.text_field :medium, class: 'form-control' %>
+  </div>
+
+  <div>
     <%= form.label :price, style: "display: block" %>
-    <%= form.text_field :price, class: 'form-control' %>
+    <%= form.number_field :price, class: 'form-control', step: 0.01, min: 0  %>
   </div>
 
   <div>
     <%= form.label :available, style: "display: block" %>
-    <%= form.text_field :available, class: 'form-control' %>
+    <%= form.check_box :available, class: 'form-check-input' %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Submit", class:"btn btn-secondary" %>
   </div>
 <% end %>

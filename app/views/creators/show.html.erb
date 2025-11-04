@@ -1,7 +1,9 @@
 <h1><%= "#{@creator.full_name}" %></h1>
 
-<%= link_to "Back to artists", creators_path %>
+<div class="btn-group" role="group">
+<%= link_to "Our Artists", creators_path, class:"btn btn-secondary" %>
 <% if session[:role]== 'admin' %>
-    <%= link_to "Edit this artist", edit_creator_path(@creator) %>
-    <%= button_to "Delete this artist", @creator, method: :delete %>
+    <%= link_to "Edit Artist", edit_creator_path(@creator), class:"btn btn-secondary" %>
+    <%= link_to "Delete Artist", @creator, data: { "turbo-method": :delete }, class:"btn btn-secondary" %>
 <% end %>
+</div>

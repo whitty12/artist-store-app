@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark">
+        <div class="container-fluid">
+          <div class="d-flex align-items-end">
+            <div class= "product-redirect">
+              <%= button_to "Store", products_path, method: :get %>
+            </div>
+            <div>
+              <ul class="navbar-nav navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <%= button_to "Create an account", new_user_path, method: :get %>
+                </li>
+              </ul>
+            </div>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <% if session[:user_id] %>
+                <li class='nav-item'>
+                  <% user = User.find_by(id: session[:user_id]) %>
+                  <% if user %>
+                    <span class="nav-link">Welcome, <%= link_to  user.username, user_path(user)%></span>
+                  <% end %>
+                    <% if session[:user_id] %>
+                      <% user = User.find_by(id: session[:user_id]) %>
+                      <% if user %>
+                        <li class='nav-item'>
+                          <%= button_to 'My Cart', cart_path(@cart), method: :get %>
+                        </li>
+                      <% end %>
+                    <% end %>  
+                    <div class="login-logout">
+                      <% if session[:user_id] %>
+                        <%= button_to 'Logout', logout_path, method: :delete, class: 'logout-link nav-link', data: { confirm: 'Are you sure you want to log out?' } %>
+                      <% else %>
+                        <%= button_to 'Login', login_path,method: :get, class: 'logout-link nav-link' %>
+                      <% end %>
+                    </div>
+                  </li>
+                </li>
+              <% end %>
+            </ul>
+
+          </div>
+        </div>
+        </div>
+      </nav>

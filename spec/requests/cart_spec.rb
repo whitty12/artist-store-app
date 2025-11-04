@@ -3,40 +3,31 @@ require 'rails_helper'
 RSpec.describe "Carts", type: :request do
   describe "get users/:id/cart to: cart#index" do
     before do 
-      #create the product type
-      @product_type = ProductType.create(
-        medium:"Writing",
-        artstyle: "Short Story"
+      @creator = Creator.create!(
+        first_name: "Skylar",
+        last_name: "Loving",
       )
       #create our products
-      @product1 = Product.create(
+      @product1 = Product.create!(
           title: "Fancy Art",
-          product_type_id:@product_type.id,
-      )
-      @product2 = Product.create(
-          title: "Bad Writing",
-          product_type_id:@product_type.id,
-      )
-      #create the details for each product
-      @product_details1 = ProductDetail.create(
-        product_id: @product1.id,
-        description: "A fancy little story",
-        price: 0.25,
-        in_stock: 2
-      )
-      @product_details2 = ProductDetail.create(
-        product_id: @product2.id,
-        description: "A bad story",
-        price: 0.25,
-        in_stock: 2
+          medium:"Writing",
+          creator_id: @creator.id,
+          description: "A fancy little story",
+          price: 0.25,
+          available: true
       )
 
-      #update products with ids
-      @product1.update(product_details_id: @product_details1.id)
-      @product2.update(product_details_id: @product_details2.id)
+      @product2 = Product.create!(
+          title: "Bad Writing",
+          medium: "Art",
+          creator_id: @creator.id,
+          description: "A bad story",
+          price: 0.25,
+          available: false
+      )
 
       #create user
-      @user1 = User.create(
+      @user1 = User.create!(
         username: "username",
         password: "password",
         email: "testemail@com",
@@ -48,26 +39,28 @@ RSpec.describe "Carts", type: :request do
         sex: "F",
         birthday: "January 1, 1990"
       )
-      @cart = Cart.create(
+      @cart = Cart.create!(
         user_id: @user1.id
       )
 
       #create the items for our cart and associated products
-      @cart_item1 = CartItem.create(
+      @cart_item1 = CartItem.create!(
         product_id: @product1.id,
         cart_id: @cart.id
       )
 
-      @cart_item2 = CartItem.create(
+      @cart_item2 = CartItem.create!(
         product_id: @product2.id,
         cart_id: @cart.id
       )
-
-      @user1.update(cart_id:@cart_id)
     end
 
     it 'should load a page of all the cart items' do
-      get "/users/#{@user1.id}/cart"
+      post '/login', params: { 
+        username: "username", 
+        password: 'password' 
+      }
+      get "/cart"
       expect(response.body).to include(@product1.title)
       expect(response.body).to include(@product2.title)
     end

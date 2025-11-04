@@ -51,6 +51,9 @@ class CreatorsController < ApplicationController
   end
 
   def destroy
+    @creator.destroy
+
+    redirect_to creators_path, notice: "Artist was successfully deleted."
   end
 
   private

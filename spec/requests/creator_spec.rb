@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Creators", type: :request do
   describe "GET /creators to creators#index" do
+    User.destroy_all
+
     let!(:creator1) { 
       Creator.create(
         first_name: "Skylar",
@@ -14,6 +16,22 @@ RSpec.describe "Creators", type: :request do
         last_name: "Suning"
       )
     }
+    let!(:admin_user) {
+      User.create(
+        username: "Admin_User",
+        password: "password",
+        cart_id: 1,
+        email: "testemail@com",
+        first_name: "Stephanie",
+        last_name: "Whitworth",
+        address: "test address",
+        zipcode: "00000",
+        state: "CO",
+        sex: "F",
+        birthday: "January 1, 1990",
+        role: 'admin'
+      )
+    }
 
     #write a test showing the index page is loading correctly
     it 'returns a page containing names of all creators' do
@@ -24,6 +42,8 @@ RSpec.describe "Creators", type: :request do
   end
   
   describe "GET /creators/:id creators#show" do
+    User.destroy_all
+
     let!(:creator1) { 
       Creator.create(
         first_name: "Skylar",
@@ -36,20 +56,46 @@ RSpec.describe "Creators", type: :request do
         last_name: "Suning"
       )
     }
-
-    @update_creator_params = {first_name: "Stephanie", last_name: "Whitworth"}
+    let!(:admin_user) {
+      User.create(
+        username: "Admin_User",
+        password: "password",
+        cart_id: 1,
+        email: "testemail@com",
+        first_name: "Stephanie",
+        last_name: "Whitworth",
+        address: "test address",
+        zipcode: "00000",
+        state: "CO",
+        sex: "F",
+        birthday: "January 1, 1990",
+        role: 'admin'
+      )
+    }
 
     #write a test showing the show page is loading correctly
     it 'returns a page containing the information of a creator' do
-      get '/creators/1'
+      get "/creators/#{creator1.id}"
       expect(response.body).to include('Skylar')
       expect(response.body).to include('Alfredo')
     end
 
     it 'returns a page containing the information of a creator' do
-      put '/creators/1', params: @update_creator_params
-      expect(response.body).to include('Stephanie')
-      expect(response.body).to include('Whitworth')
+      post '/login', params: { 
+        username: "Admin_User", 
+        password: 'password' 
+      }
+      put "/creators/#{creator1.id}", params: { 
+        product: { 
+          first_name:"Test",
+          last_name: "W"
+        }
+      }
+
+      creator1.reload
+      
+      expect(response.body).to include('Test')
+      expect(response.body).to include('W')
     end
   end
   

@@ -13,11 +13,11 @@ class SessionsController < ApplicationController
                 redirect_to products_path
             else
                 flash.now[:alert] = 'Invalid username or password.'
-                render :new
+                render :new, status: :unauthorized
             end
         else
             flash.now[:alert] = 'Invalid username or password.'
-            render :new
+            render :new, status: :unauthorized
         end
     end
 

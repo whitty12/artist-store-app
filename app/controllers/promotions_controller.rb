@@ -54,6 +54,9 @@ class PromotionsController < ApplicationController
   end
 
   def destroy
+    @promotion.destroy
+
+    redirect_to promotions_path
   end
 
   private

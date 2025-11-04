@@ -2,8 +2,10 @@
     <p> Discount: <%= "#{@promotion.discount_percent}%" %> </p>
 
 
-<%= link_to "Back to promotions", promotions_path %>
-<% if session[:role]== 'admin' %>
-    <%= link_to "Edit this promotion", edit_promotion_path(@promotion) %>
-    <%= button_to "Delete this promotion", @promotion, method: :delete %>
-<% end %>
+<div class="btn-group" role="group">
+    <%= link_to "Back", promotions_path,  class:"btn btn-secondary" %>
+    <% if session[:role]== 'admin' %>
+        <%= link_to "Edit Promotion", edit_promotion_path(@promotion),  class:"btn btn-secondary" %>
+        <%= link_to "Delete Promotion", @promotion,  class:"btn btn-secondary", data: { "turbo-method": :delete } %>
+    <% end %>
+</div>

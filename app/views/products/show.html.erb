@@ -2,23 +2,26 @@
    
    <%= render @product %>
 
-   <% if session[:user_id].present? %>
+   <div class="btn-group" role="group">
+   <% if current_user.present? %>
       <%= button_to "Add to Cart", cart_cart_items_path(@cart), 
          params: { 
-            cart_item: { 
+            cart_item: {
                product_id: @product.id 
             }
          }, 
-         method: :post %>
-      <%= link_to "View Cart", cart_path(@cart) %>
+         method: :post,
+         class:"btn btn-primary" %>
+      <%= link_to "View Cart", cart_path(@cart), class:"btn btn-secondary" %>
    <% else %>
-      <p> Login to add to your cart </p>
+      <%= link_to "Login to Add to Cart", login_path, class:"btn btn-secondary" %>
    <% end %>
 
 
-   <%= link_to "Return to product list", products_path %>
+   <%= link_to "Return to product list", products_path, class:"btn btn-secondary" %>
 
    <% if session[:role]== 'admin' %>
-      <%= link_to "Edit this product", edit_product_path(@product) %>
-      <%= button_to "Delete this product", @product, method: :delete %>
+      <%= link_to "Edit this product", edit_product_path(@product), class:"btn btn-secondary" %>
+      <%= link_to "Delete this product", @product, data: { "turbo-method": :delete }, class:"btn btn-secondary" %>
    <% end %>
+   </div>

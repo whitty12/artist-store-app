@@ -38,13 +38,13 @@
   <div>
     <%= form.label :address, style: "display: block" %> 
     <%= form.text_field :address, class: 'form-control' %>
-    <%= form.label :zip, style: "display: block" %> 
-    <%= form.text_field :zip, class: 'form-control' %>
+    <%= form.label :zipcode, style: "display: block" %> 
+    <%= form.text_field :zipcode, class: 'form-control' %>
     <%= form.label :state, style: "display: block" %> 
     <%= form.text_field :state, class: 'form-control' %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Submit", class:"btn btn-secondary"%>
   </div>
 <% end %>
